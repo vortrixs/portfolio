@@ -1,6 +1,6 @@
 <?php
 
-namespace Vortrixs\Portfolio\Code;
+namespace Vortrixs\Portfolio\Portfolio;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
