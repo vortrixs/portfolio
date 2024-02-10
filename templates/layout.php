@@ -1,9 +1,12 @@
-<html>
+<html lang="en">
 <head>
-    <title>he-jepsen.dk | Portfolio</title>
+    <title>Hans Erik Jepsen | Full-stack Developer | he-jepsen.dk</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="og:site_name" content="Hans Erik Jepsen | Full-stack Developer | he-jepsen.dk">
+    <?= $head ?>
 </head>
 <body>
     <header>
