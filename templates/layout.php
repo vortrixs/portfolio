@@ -6,6 +6,14 @@
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <?= $content ?>
+    <header>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/portfolio">Portfolio</a>
+        </nav>
+    </header>
+    <main>
+        <?= $content ?>
+    </main>
 </body>
 </html>
