@@ -27,5 +27,11 @@
     "require-dev": {
         "codeception/codeception": "^5.0",
         "docler-labs/codeception-slim-module": "^4.1.0"
+    },
+    "scripts": {
+        "serve": [
+            "Composer\\Config::disableProcessTimeout",
+            "php -S localhost:3000 -t ./public/"
+        ]
     }
 }
