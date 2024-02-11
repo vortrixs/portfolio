@@ -25,9 +25,9 @@ jobs:
     - run: composer run test
 
     - run: mkdir ./build
-    - run: cp ./public ./build/public
-    - run: cp ./src ./build/src
-    - run: cp ./vendor ./build/vendor
+    - run: cp -r ./public ./build/public
+    - run: cp -r ./src ./build/src
+    - run: cp -r ./vendor ./build/vendor
     - run: cp ./.github/apache/.htaccess ./build/.htaccess
 
     - run: ls -la ./build
