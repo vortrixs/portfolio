@@ -5,22 +5,25 @@ namespace Tests\Unit;
 
 use Tests\Support\UnitTester;
 use Vortrixs\Portfolio\Renderer;
+use Vortrixs\Portfolio\TemplateFinder;
 
 class RendererTest extends \Codeception\Test\Unit
 {
 
     protected UnitTester $tester;
 
+    protected TemplateFinder $templateFinder;
+
     protected function _before()
     {
+        $this->templateFinder = new TemplateFinder(getcwd() . '/tests/Support/Data/templates');
     }
 
     public function testCanRenderViewTemplate(): void {
         $view = new class {
             public function getHelloWorld(): string { return 'Hello World'; }
         };
-        $template = codecept_data_dir('view.template.php');
-        $renderer = new Renderer();
+        $renderer = new Renderer($this->templateFinder);
 
         $expected = <<<HTML
         <html>
@@ -32,15 +35,14 @@ class RendererTest extends \Codeception\Test\Unit
         </html>
         HTML;
 
-        $output = $renderer->renderView($view, $template);
+        $output = $renderer->renderView($view, 'view.template');
 
         $this->tester->assertSame($expected, $output);
     }
 
     public function testCanRenderLayoutTemplate(): void {
         $content = 'This is my custom content';
-        $template = codecept_data_dir('layout.template.php');
-        $renderer = new Renderer();
+        $renderer = new Renderer($this->templateFinder);
 
         $expected = <<<HTML
         <html>
@@ -52,7 +54,7 @@ class RendererTest extends \Codeception\Test\Unit
         </html>
         HTML;
 
-        $output = $renderer->renderLayout($content, $template);
+        $output = $renderer->renderLayout($content, 'layout.template');
 
         $this->tester->assertSame($expected, $output);
     }
@@ -61,9 +63,7 @@ class RendererTest extends \Codeception\Test\Unit
         $view = new class {
             public function getHelloWorld(): string { return 'Hello World'; }
         };
-        $layout_template = codecept_data_dir('layout.template.php');
-        $view_template = codecept_data_dir('view2.template.php');
-        $renderer = new Renderer();
+        $renderer = new Renderer($this->templateFinder);
 
         $expected = <<<HTML
         <html>
@@ -75,7 +75,7 @@ class RendererTest extends \Codeception\Test\Unit
         </html>
         HTML;
 
-        $output = $renderer->render($view, $layout_template, $view_template);
+        $output = $renderer->render($view, 'view2.template', 'layout.template');
 
         $this->tester->assertSame($expected, $output);
     }

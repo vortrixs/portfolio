@@ -3,22 +3,25 @@
 namespace Vortrixs\Portfolio;
 
 class Renderer {
-    public function renderView(object $view, string $templatePath) : string {
-        return $this->renderTemplate($view, $templatePath);
+    public function __construct(private TemplateFinder $templateFinder) {
     }
 
-    public function renderLayout(string $content, string $templatePath) : string {
-        return $this->renderTemplate($content, $templatePath);
+    public function renderView(object $view, string $templateName) : string {
+        return $this->renderTemplate($view, $templateName);
     }
 
-    public function render(object $view, string $layoutTemplatePath, string $viewTemplatePath): string {
-        $content = $this->renderTemplate($view, $viewTemplatePath);
-
-        return $this->renderTemplate($content, $layoutTemplatePath);
+    public function renderLayout(string $content, string $templateName) : string {
+        return $this->renderTemplate($content, $templateName);
     }
 
-    private function renderTemplate(mixed $input, string $templatePath) {
-        $templateClosure = include($templatePath);
+    public function render(object $view, string $viewTemplateName, string $layoutTemplateName = 'layout'): string {
+        $content = $this->renderTemplate($view, $viewTemplateName);
+
+        return $this->renderTemplate($content, $layoutTemplateName);
+    }
+
+    private function renderTemplate(mixed $input, string $templateName) {
+        $templateClosure = include($this->templateFinder->get($templateName));
 
         ob_start();
 

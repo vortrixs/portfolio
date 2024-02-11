@@ -15,6 +15,7 @@ class Provider {
         $this->registerPortfolio();
 
         $container->set(StreamFactoryInterface::class, $container->get(StreamFactory::class));
+        $container->set(TemplateFinder::class, new TemplateFinder(dirname(__DIR__) . '/templates'));
     }
 
     public function registerHome() {
