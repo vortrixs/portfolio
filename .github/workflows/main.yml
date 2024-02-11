@@ -1,0 +1,43 @@
+name: PHP CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: [8.3]
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Use PHP ${{ matrix.node-version }}
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.node-version }}
+    
+    - run: composer i
+    
+    - run: composer run test
+
+    - run: mkdir ./build
+    - run: cp ./public ./build/public
+    - run: cp ./src ./build/src
+    - run: cp ./vendor ./build/vendor
+    - run: cp ./.github/apache/.htaccess ./build/.htaccess
+
+    - run: ls -la ./build
+    
+#    - name: Upload ftp
+#      uses: sebastianpopp/ftp-action@releases/v2
+#      with:
+#        host: ${{ secrets.FTP_SERVER }}
+#        user: ${{ secrets.FTP_USERNAME }}
+#        password: ${{ secrets.FTP_PASSWORD }}
+#        localDir: "build"
+#        remoteDir: "public_html"
+#        options: "--delete --asci"
