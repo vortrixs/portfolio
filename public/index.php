@@ -2,16 +2,8 @@
 
 namespace Vortrixs\Portfolio\Public;
 
-use Vortrixs\Portfolio\Provider;
+$bootstrap = require_once('../src/App.php');
 
-require __DIR__ . '/../vendor/autoload.php';
-
-$container = new \DI\Container();
-
-$app = \DI\Bridge\Slim\Bridge::create($container);
-
-$container->make(Provider::class);
-
-$app->addErrorMiddleware(false, false, false);
+$app = call_user_func($bootstrap);
 
 $app->run();

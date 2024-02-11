@@ -9,7 +9,7 @@ actor: FunctionalTester
 modules:
     config:
         DoclerLabs\CodeceptionSlimModule\Module\Slim:
-            application: /public/index.php
+            application: tests/TestApp.php
     enabled:
         - REST:
             depends: DoclerLabs\CodeceptionSlimModule\Module\Slim

@@ -22,7 +22,8 @@ class Controller {
             <meta property="og:title" content="Home">
             <meta property="og:url" content="https://he-jepsen.dk/">
         HTML;
-        $body = $this->streamFactory->createStream($this->renderer->render($this->view, $head));
+
+        $body = $this->streamFactory->createStream($this->renderer->render($this->view, 'home'));
 
         return $response
             ->withBody($body)
