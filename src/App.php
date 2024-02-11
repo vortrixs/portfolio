@@ -2,9 +2,9 @@
 
 namespace Vortrixs\Portfolio;
 
-return function () {
-    require __DIR__ . '/../vendor/autoload.php';
+use Slim\App;
 
+function createApp(): App {
     $container = new \DI\Container();
 
     $app = \DI\Bridge\Slim\Bridge::create($container);

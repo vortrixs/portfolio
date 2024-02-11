@@ -6,7 +6,10 @@
         "psr-4": {
             "Vortrixs\\Portfolio\\": "src/",
             "Vortrixs\\Portfolio\\Public\\": "public/"
-        }
+        },
+        "files": [
+            "src/App.php"
+        ]
     },
     "authors": [
         {

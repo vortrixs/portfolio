@@ -2,8 +2,8 @@
 
 namespace Vortrixs\Portfolio\Public;
 
-$bootstrap = require_once('../src/App.php');
+use function Vortrixs\Portfolio\createApp;
 
-$app = call_user_func($bootstrap);
+require __DIR__ . '/../vendor/autoload.php';
 
-$app->run();
+createApp()->run();

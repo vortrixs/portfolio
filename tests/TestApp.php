@@ -2,8 +2,6 @@
 
 namespace Tests;
 
-$bootstrap = require_once('src/App.php');
+use function Vortrixs\Portfolio\createApp;
 
-$app = call_user_func($bootstrap);
-
-return $app;
+return createApp();
