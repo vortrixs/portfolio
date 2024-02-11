@@ -1,6 +1,8 @@
 <?php
 
-return function (string $content, string $head = null) {
+use Vortrixs\Portfolio\Layout\Layout;
+
+return function (Layout $view) {
 ?>
 <html lang="en">
     <head>
@@ -10,17 +12,12 @@ return function (string $content, string $head = null) {
         <link rel="stylesheet" href="style.css" />
         <meta property="twitter:card" content="summary_large_image">
         <meta property="og:site_name" content="Hans Erik Jepsen | Full-stack Developer | he-jepsen.dk">
-        <?= $head ?>
+        <?= $view->head ?>
     </head>
     <body>
-        <header>
-            <nav>
-                <a href="/">Home</a>
-                <a href="/portfolio">Portfolio</a>
-            </nav>
-        </header>
+        <?= $view->header ?>
         <main>
-            <?= $content ?>
+            <?= $view->content ?>
         </main>
     </body>
 </html>
