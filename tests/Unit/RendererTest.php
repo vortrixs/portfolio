@@ -27,11 +27,8 @@ class RendererTest extends \Codeception\Test\Unit
 
         $expected = <<<HTML
         <html>
-            <head>
-            </head>
-            <body>
-                <main>{$view->getHelloWorld()}</main>
-            </body>
+            <head></head>
+            <body><main>{$view->getHelloWorld()}</main></body>
         </html>
         HTML;
 
@@ -46,11 +43,8 @@ class RendererTest extends \Codeception\Test\Unit
 
         $expected = <<<HTML
         <html>
-            <head>
-            </head>
-            <body>
-                <main>{$content}</main>
-            </body>
+            <head></head>
+            <body><main>{$content}</main></body>
         </html>
         HTML;
 
@@ -59,26 +53,20 @@ class RendererTest extends \Codeception\Test\Unit
         $this->tester->assertSame($expected, $output);
     }
 
-    public function testCanRenderViewInLayout() {
-        $view = new class {
-            public function getHelloWorld(): string { return 'Hello World'; }
-        };
+    public function testAddCustomHeadTagsToLayout() {
+        $content = 'This is my custom content';
+        $head = '<meta charset="utf-8">';
         $renderer = new Renderer($this->templateFinder);
 
         $expected = <<<HTML
         <html>
-            <head>
-            </head>
-            <body>
-                <main><p>{$view->getHelloWorld()}</p></main>
-            </body>
+            <head>{$head}</head>
+            <body><main>{$content}</main></body>
         </html>
         HTML;
 
-        $output = $renderer->render($view, 'view2.template', 'layout.template');
+        $output = $renderer->renderLayout($content, 'layout2.template', $head);
 
         $this->tester->assertSame($expected, $output);
     }
-
-    // test can pass custom <head> tags
 }

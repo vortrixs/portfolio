@@ -18,12 +18,14 @@ class Controller {
     }
 
     public function __invoke(Response $response) {
+        $view = $this->renderer->renderView($this->view, 'home');
+
         $head = <<<HTML
             <meta property="og:title" content="Home">
             <meta property="og:url" content="https://he-jepsen.dk/">
         HTML;
 
-        $body = $this->streamFactory->createStream($this->renderer->render($this->view, 'home'));
+        $body = $this->streamFactory->createStream($this->renderer->renderLayout($view, head: $head));
 
         return $response
             ->withBody($body)
