@@ -1,0 +1,16 @@
+# Codeception Test Suite Configuration
+#
+# Suite for functional tests
+# Emulate web requests and make application process them
+# Include one of framework modules (Symfony, Yii2, Laravel, Phalcon5) to use it
+# Remove this suite if you don't use frameworks
+
+actor: FunctionalTester
+modules:
+    config:
+        DoclerLabs\CodeceptionSlimModule\Module\Slim:
+            application: /public/index.php
+    enabled:
+        - REST:
+            depends: DoclerLabs\CodeceptionSlimModule\Module\Slim
+step_decorators: ~

@@ -25,13 +25,17 @@
         "php-di/slim-bridge": "^3.4"
     },
     "require-dev": {
-        "codeception/codeception": "^5.0",
-        "docler-labs/codeception-slim-module": "^4.1.0"
+        "codeception/codeception": "^5.1",
+        "docler-labs/codeception-slim-module": "^4.1",
+        "codeception/module-phpbrowser": "*",
+        "codeception/module-asserts": "*",
+        "codeception/module-rest": "^3.3"
     },
     "scripts": {
         "serve": [
             "Composer\\Config::disableProcessTimeout",
             "php -S localhost:8080 -t ./public/"
-        ]
+        ],
+        "test": "codecept run"
     }
 }
