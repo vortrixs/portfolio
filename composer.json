@@ -36,6 +36,9 @@
             "Composer\\Config::disableProcessTimeout",
             "php -S localhost:8080 -t ./public/"
         ],
-        "test": "codecept run"
+        "test": "codecept run",
+        "test-unit": "codecept run Unit",
+        "test-func": "codecept run Functional",
+        "test-acpt": "codecept run Acceptance"
     }
 }

@@ -3,23 +3,27 @@
 namespace Vortrixs\Portfolio;
 
 class Renderer {
-    public function render($view, string $head = null) {
-        $fqcn_split = explode('\\', get_class($view));
-
-        $template_name = strtolower($fqcn_split[count($fqcn_split) - 2]);
-        
-        ob_start();
-        
-        require_once "../templates/{$template_name}.php";
-
-        return $this->renderLayout(ob_get_clean(), $head);
+    public function renderView(object $view, string $templatePath) : string {
+        return $this->renderTemplate($view, $templatePath);
     }
 
-    private function renderLayout(string $content, string $head = null) {
+    public function renderLayout(string $content, string $templatePath) : string {
+        return $this->renderTemplate($content, $templatePath);
+    }
+
+    public function render(object $view, string $layoutTemplatePath, string $viewTemplatePath): string {
+        $content = $this->renderTemplate($view, $viewTemplatePath);
+
+        return $this->renderTemplate($content, $layoutTemplatePath);
+    }
+
+    private function renderTemplate(mixed $input, string $templatePath) {
+        $templateClosure = include($templatePath);
+
         ob_start();
 
-        require_once '../templates/layout.php';
+        call_user_func($templateClosure, $input);
 
-        return ob_get_clean();
+        return trim(ob_get_clean());
     }
 }
