@@ -3,8 +3,7 @@ TODO
 
 - Split code into domains
   - CMS
-  - Login?
-  - Public? (handles things that the end-user sees)
+  - Login
 
 - Markup for home page
 - Markup for portfolio page
