@@ -3,27 +3,19 @@
 
 namespace Tests\Unit;
 
-use Psr\Container\ContainerInterface;
-use Slim\App;
 use Tests\Support\Data\ValidView;
 use Tests\Support\Data\InvalidView;
+use Tests\Support\Helper\App;
 use Tests\Support\UnitTester;
 use Vortrixs\Portfolio\SharedKernel\Renderer;
 
-use function Vortrixs\Portfolio\createApp;
-
 class RendererCest
 {
-    private ContainerInterface $container; 
-
-    public function _before(): void
-    {
-        $this->container = createApp()->getContainer();
-    }
+    use App;
 
     public function testCanRenderViewBasedOnViewModel(UnitTester $I): void
     {
-        $renderer = $this->container->get(Renderer::class);
+        $renderer = $this->container()->get(Renderer::class);
         $viewModel = new ValidView\ViewModel;
 
         $expected = <<<HTML
@@ -40,7 +32,7 @@ class RendererCest
 
     public function testCannotRenderViewIfOnlyViewModelExists(UnitTester $I): void
     {
-        $renderer = $this->container->get(Renderer::class);
+        $renderer = $this->container()->get(Renderer::class);
         $viewModel = new InvalidView\ViewModel;
 
         $I->expectThrowable(

@@ -2,8 +2,7 @@
 
 namespace Vortrixs\Portfolio\Layout;
 
-return function (ViewModel $view) {
-?>
+return function (ViewModel $view) { ?>
 <html lang="en">
     <head>
         <title>Hans Erik Jepsen | Full-stack Developer | he-jepsen.dk</title>
@@ -23,5 +22,4 @@ return function (ViewModel $view) {
         </main>
     </body>
 </html>
-<?php
-};
+<?php };

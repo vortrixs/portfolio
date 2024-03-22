@@ -2,6 +2,8 @@
 
 namespace Vortrixs\Portfolio;
 
+use DI\Bridge\Slim\Bridge;
+use DI\Container;
 use Psr\Http\Message\StreamFactoryInterface;
 use Slim\App;
 use Slim\Psr7\Factory\StreamFactory;
@@ -11,15 +13,15 @@ use Vortrixs\Portfolio\Portfolio\Controller as PortfolioController;
 
 function createApp(): App
 {
-    $container = new \DI\Container();
+    $container = new Container();
 
-    $app = \DI\Bridge\Slim\Bridge::create($container);
+    $app = Bridge::create($container);
 
     $container->set(StreamFactoryInterface::class, $container->get(StreamFactory::class));
 
-    $container->call(function (UrlHelper $urlHelper) {
-        $this->router->get($urlHelper->home, HomeController::class);
-        $this->router->get($urlHelper->portfolio, PortfolioController::class);
+    $container->call(function (UrlHelper $urlHelper, App $router) {
+        $router->get($urlHelper->home, HomeController::class);
+        $router->get($urlHelper->portfolio, PortfolioController::class);
     });
 
     $app->addErrorMiddleware(true, false, false);

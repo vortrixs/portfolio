@@ -1,6 +1,6 @@
 <?php
 
-namespace Vortrixs\Portfolio\Navigation;
+namespace Vortrixs\Portfolio\Components\Navigation;
 
 use Vortrixs\Portfolio\SharedKernel\UrlHelper;
 
@@ -16,7 +16,7 @@ class ViewModel
     public function getPages(): array
     {
         return [
-            ['url' => $this->urlHelper->home, 'label' => 'Home'],
+            ['url' => $this->urlHelper->home, 'label' => 'CV'],
             ['url' => $this->urlHelper->portfolio, 'label' => 'Portfolio']
         ];
     }

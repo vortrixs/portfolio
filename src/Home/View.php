@@ -2,10 +2,14 @@
 
 namespace Vortrixs\Portfolio\Home;
 
-return function (ViewModel $view) {
-?>
-    <h1>Home!!!</h1>
-    <p>Content for home goes here!!!</p>
-    <p>This is a prop used from the view: <?= $view->getHelloWorld(); ?></p>
-<?php
-};
+return function (ViewModel $viewModel) { ?>
+    <h1>CV</h1>
+    <?php foreach ($viewModel->getCvList() as $cv) : ?>
+        <article class="card">
+            <h2><?= $cv['position'] ?> @ <?= $cv['company'] ?></h2>
+            <p><?= $cv['length'] ?></p>
+            <p><?= $cv['tags'] ?></p>
+            <p><?= $cv['description'] ?></p>
+        </article>
+    <?php endforeach; ?>
+<?php };

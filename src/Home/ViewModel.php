@@ -4,13 +4,20 @@ namespace Vortrixs\Portfolio\Home;
 
 class ViewModel
 {
-    public function __construct()
+    public function __construct(private Model $model)
     {
-        
     }
 
-    public function getHelloWorld() : string
+    /**
+     * return array<{position: string, company: string, length: string, tags: string, description: string}>
+     */
+    public function getCvList(): array
     {
-        return 'Hello World!';
+        return array_map([$this, 'formatCV'], $this->model->list());
+    }
+
+    private function formatCv(Entity $entity)
+    {
+        return get_object_vars($entity);
     }
 }

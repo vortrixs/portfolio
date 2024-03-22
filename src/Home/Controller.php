@@ -22,6 +22,7 @@ class Controller
     public function __invoke(Response $response)
     {
         $viewModel = $this->viewModelFactory->create(ViewModel::class);
+
         $head = [
             '<meta property="og:title" content="Home">',
             '<meta property="og:url" content="https://he-jepsen.dk/">'
