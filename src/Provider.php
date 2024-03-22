@@ -2,27 +2,23 @@
 
 namespace Vortrixs\Portfolio;
 
-use Slim\App as Router;
 use DI\Container;
+use Slim\App as Router;
 use Psr\Http\Message\StreamFactoryInterface;
 use Slim\Psr7\Factory\StreamFactory;
 use Vortrixs\Portfolio\Home\Controller as HomeController;
 use Vortrixs\Portfolio\Portfolio\Controller as PortfolioController;
+use Vortrixs\Portfolio\SharedKernel\UrlHelper;
 
-class Provider {
-    public function __construct(private Router $router, private Container $container) {
-        $this->registerHome();
-        $this->registerPortfolio();
-
+class Provider
+{
+    public function __construct(private Router $router, private Container $container)
+    {
         $container->set(StreamFactoryInterface::class, $container->get(StreamFactory::class));
-        $container->set(TemplateFinder::class, new TemplateFinder(dirname(__DIR__) . '/templates'));
-    }
 
-    public function registerHome() {
-        $this->router->get('/', HomeController::class);
-    }
-
-    private function registerPortfolio() {
-        $this->router->get('/portfolio', PortfolioController::class);
+        $container->call(function (UrlHelper $urlHelper) {
+            $this->router->get($urlHelper->home, HomeController::class);
+            $this->router->get($urlHelper->portfolio, PortfolioController::class);
+        });
     }
 }

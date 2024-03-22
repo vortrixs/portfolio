@@ -1,8 +1,8 @@
 <?php
 
-use Vortrixs\Portfolio\Layout\Layout;
+namespace Vortrixs\Portfolio\Layout;
 
-return function (Layout $view) {
+return function (ViewModel $view) {
 ?>
 <html lang="en">
     <head>
@@ -15,7 +15,9 @@ return function (Layout $view) {
         <?= $view->head ?>
     </head>
     <body>
-        <?= $view->header ?>
+        <header>
+            <?= $view->header ?>
+        </header>
         <main>
             <?= $view->content ?>
         </main>

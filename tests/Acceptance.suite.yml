@@ -9,7 +9,7 @@ modules:
     enabled:
         - PhpBrowser:
             url: http://localhost:9999 # See Support\Helper\LocalhostServer
-# add Codeception\Step\Retry trait to AcceptanceTester to enable retries
+
 step_decorators:
     - Codeception\Step\ConditionalAssertion
     - Codeception\Step\TryTo

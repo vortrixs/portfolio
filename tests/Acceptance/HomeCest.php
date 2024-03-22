@@ -5,15 +5,15 @@ namespace Tests\Acceptance;
 
 use Tests\Support\Helper\LocalhostServer;
 use Tests\Support\AcceptanceTester;
-use Vortrixs\Portfolio\Home\View;
+use Vortrixs\Portfolio\Home\ViewModel;
 
 class HomeCest
 {
     use LocalhostServer;
 
-    public function tryToTest(AcceptanceTester $I)
+    public function testHomePage(AcceptanceTester $I)
     {
-        $view = new View;
+        $view = new ViewModel;
 
         $I->amOnPage('/');
 

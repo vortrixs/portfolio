@@ -29,7 +29,7 @@ trait LocalhostServer {
         }
 
         if (!isset($this->localhost_server_pid)) {
-            throw new \Error('Trying to shut down localhost server, but the process was not found');
+            throw new \Error('Trying to shut down localhost server, but PID is not available. Try to kill the process manually.');
         }
 
         exec('sudo kill -9 ' . $this->localhost_server_pid);

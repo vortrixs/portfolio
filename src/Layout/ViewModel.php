@@ -2,7 +2,8 @@
 
 namespace Vortrixs\Portfolio\Layout;
 
-class Layout {
+class ViewModel
+{
     public function __construct(
         public readonly string $content,
         public readonly string $header,

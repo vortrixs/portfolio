@@ -4,7 +4,8 @@ namespace Vortrixs\Portfolio;
 
 use Slim\App;
 
-function createApp(): App {
+function createApp(): App
+{
     $container = new \DI\Container();
 
     $app = \DI\Bridge\Slim\Bridge::create($container);

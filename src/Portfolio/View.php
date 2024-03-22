@@ -2,8 +2,10 @@
 
 namespace Vortrixs\Portfolio\Portfolio;
 
-class View {
-    public function getDescription() : string {
-        return 'Description of the portfolio page!';
-    }
-}
+return function (ViewModel $view) {
+?>
+    <h1>Portfolio!!!</h1>
+    <p>Content for portfolio goes here!!!</p>
+    <p>This is a prop used from the view: <?= $view->getDescription(); ?></p>
+<?php
+};

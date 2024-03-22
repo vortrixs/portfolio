@@ -2,8 +2,10 @@
 
 namespace Vortrixs\Portfolio\Home;
 
-class View {
-    public function getHelloWorld() : string {
-        return 'Hello World!';
-    }
-}
+return function (ViewModel $view) {
+?>
+    <h1>Home!!!</h1>
+    <p>Content for home goes here!!!</p>
+    <p>This is a prop used from the view: <?= $view->getHelloWorld(); ?></p>
+<?php
+};

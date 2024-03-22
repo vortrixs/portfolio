@@ -2,6 +2,4 @@
 
 namespace Vortrixs\Portfolio\Home;
 
-class Model {
-    
-}
+class Model {}
