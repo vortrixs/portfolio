@@ -9,7 +9,7 @@ body {
   color: white;
   font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
   font-size: 1.2rem;
-  margin-inline: 20vw;
+  margin-inline: 20vw; /* This works well, but consider settings a max-width on larger viewports, that would also require a change to the margins */
 }
 
 a {
