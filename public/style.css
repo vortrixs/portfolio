@@ -1,3 +1,57 @@
+:root {
+  --color-primary: hsl(0, 66%, 57%);
+  --color-secondary: hsl(40, 100%, 70%);
+  --color-background: hsl(0, 0%, 7%);
+}
+
 body {
-    background-color: coral;
+  background-color: var(--color-background);
+  color: white;
+  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+  font-size: 1.2rem;
+  margin-inline: 20vw;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  color: color-mix(in hsl, currentcolor 10%, lightcoral);
+}
+
+header nav {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  font-size: 1.5rem;
+}
+
+header nav a {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+header nav a .nav__arrow {
+  visibility: hidden;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+header nav a.nav__active .nav__arrow {
+  visibility: visible;
+}
+
+header nav a:hover .nav__arrow {
+  visibility: visible;
+}
+
+.card:not(:last-of-type) {
+  margin-bottom: 50px;
+}
+
+.card .card__line {
+  color: var(--color-secondary);
 }
