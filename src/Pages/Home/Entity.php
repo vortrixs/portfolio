@@ -1,6 +1,6 @@
 <?php
 
-namespace Vortrixs\Portfolio\Home;
+namespace Vortrixs\Portfolio\Pages\Home;
 
 class Entity
 {

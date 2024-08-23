@@ -1,8 +1,7 @@
 <?php
 
-namespace Vortrixs\Portfolio\Home;
+namespace Vortrixs\Portfolio\Pages\Home;
 
-use DI\Container;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\StreamFactoryInterface;
