@@ -1,8 +1,6 @@
 actor: AcceptanceTester
 modules:
-    config:
+    enabled:
         - Tests\Support\Modules\SlimSupport:
             application: tests/TestApp.php
-    enabled:
-        - Tests\Support\Modules\SlimSupport
 step_decorators: ~
