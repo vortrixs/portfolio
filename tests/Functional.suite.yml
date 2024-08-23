@@ -12,5 +12,5 @@ modules:
             application: tests/TestApp.php
     enabled:
         - REST:
-            depends: DoclerLabs\CodeceptionSlimModule\Module\Slim
+            depends: DoclerLabs\CodeceptionSlimModule\Module\Slim        
 step_decorators: ~

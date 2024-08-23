@@ -1,9 +1,7 @@
 <?php
 
-
 namespace Tests\Acceptance;
 
-use Tests\Support\Helper\LocalhostServer;
 use Tests\Support\AcceptanceTester;
 use Tests\Support\Helper\App;
 use Vortrixs\Portfolio\Home\Entity;
@@ -12,10 +10,9 @@ use Vortrixs\Portfolio\Home\ViewModel;
 
 class HomeCest
 {
-    use LocalhostServer;
     use App;
 
-    public function testHomePage(AcceptanceTester $I)
+    public function validateStructure(AcceptanceTester $I)
     {
         /** @var Model */
         $model = $this->container()->get(Model::class);

@@ -1,16 +1,8 @@
-# Codeception Test Suite Configuration
-#
-# Suite for acceptance tests.
-# Perform tests in browser using the WebDriver or PhpBrowser.
-# If you need both WebDriver and PHPBrowser tests - create a separate suite.
-
 actor: AcceptanceTester
 modules:
+    config:
+        DoclerLabs\CodeceptionSlimModule\Module\Slim:
+            application: tests/TestApp.php
     enabled:
-        - PhpBrowser:
-            url: http://localhost:9999 # See Support\Helper\LocalhostServer
-
-step_decorators:
-    - Codeception\Step\ConditionalAssertion
-    - Codeception\Step\TryTo
-    - Codeception\Step\Retry
+        - DoclerLabs\CodeceptionSlimModule\Module\Slim
+step_decorators: ~

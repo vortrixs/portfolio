@@ -6,7 +6,7 @@ use Tests\Support\FunctionalTester;
 
 class HomeCest
 {
-    public function canLoadHomePage(FunctionalTester $I)
+    public function canLoadPage(FunctionalTester $I)
     {
         $I->haveHttpHeader('Accept', 'text/html');
 
