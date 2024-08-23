@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Tests\Unit;
 
 use Tests\Support\Data\ValidView;
@@ -11,11 +10,9 @@ use Vortrixs\Portfolio\SharedKernel\Renderer;
 
 class RendererCest
 {
-    use App;
-
     public function testCanRenderViewBasedOnViewModel(UnitTester $I): void
     {
-        $renderer = $this->container()->get(Renderer::class);
+        $renderer = $I->get(Renderer::class);
         $viewModel = new ValidView\ViewModel;
 
         $expected = <<<HTML
@@ -32,7 +29,7 @@ class RendererCest
 
     public function testCannotRenderViewIfOnlyViewModelExists(UnitTester $I): void
     {
-        $renderer = $this->container()->get(Renderer::class);
+        $renderer = $I->get(Renderer::class);
         $viewModel = new InvalidView\ViewModel;
 
         $I->expectThrowable(

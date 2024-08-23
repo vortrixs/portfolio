@@ -2,7 +2,6 @@
 
 namespace Vortrixs\Portfolio\SharedKernel;
 
-use Throwable;
 use Vortrixs\Portfolio\Components\Navigation;
 use Vortrixs\Portfolio\Layout;
 

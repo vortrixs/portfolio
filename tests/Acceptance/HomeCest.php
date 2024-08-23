@@ -3,19 +3,16 @@
 namespace Tests\Acceptance;
 
 use Tests\Support\AcceptanceTester;
-use Tests\Support\Helper\App;
 use Vortrixs\Portfolio\Home\Entity;
 use Vortrixs\Portfolio\Home\Model;
 use Vortrixs\Portfolio\Home\ViewModel;
 
 class HomeCest
 {
-    use App;
-
     public function validateStructure(AcceptanceTester $I)
     {
         /** @var Model */
-        $model = $this->container()->get(Model::class);
+        $model = $I->get(Model::class);
 
         $entities = [
             new Entity('Junior Backend Developer', 'Company #1', 'Full-time', ['PHP', 'MySQL'], 'This was my first job'),

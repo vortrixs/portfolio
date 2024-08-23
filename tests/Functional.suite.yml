@@ -8,9 +8,9 @@
 actor: FunctionalTester
 modules:
     config:
-        DoclerLabs\CodeceptionSlimModule\Module\Slim:
+        Tests\Support\Modules\SlimSupport:
             application: tests/TestApp.php
     enabled:
         - REST:
-            depends: DoclerLabs\CodeceptionSlimModule\Module\Slim        
+            depends: Tests\Support\Modules\SlimSupport
 step_decorators: ~
