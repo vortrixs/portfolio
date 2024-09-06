@@ -4,7 +4,6 @@ namespace Tests\Unit;
 
 use Tests\Support\Data\ValidView;
 use Tests\Support\Data\InvalidView;
-use Tests\Support\Helper\App;
 use Tests\Support\UnitTester;
 use Vortrixs\Portfolio\SharedKernel\Renderer;
 

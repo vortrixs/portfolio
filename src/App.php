@@ -20,6 +20,7 @@ function createApp(): App
     $container->set(StreamFactoryInterface::class, $container->get(StreamFactory::class));
 
     $container->call(function (UrlHelper $urlHelper, App $router) {
+        $router->get($urlHelper->frontpage, HomeController::class);
         $router->get($urlHelper->home, HomeController::class);
         $router->get($urlHelper->portfolio, PortfolioController::class);
     });
