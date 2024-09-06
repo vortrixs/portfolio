@@ -13,7 +13,7 @@ class ViewModel
      */
     public function getCvList(): array
     {
-        return array_map([$this, 'formatCV'], $this->model->list());
+        return array_map($this->formatCv(...), $this->model->list());
     }
 
     private function formatCv(Entity $entity)

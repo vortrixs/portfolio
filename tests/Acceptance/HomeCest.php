@@ -3,9 +3,7 @@
 namespace Tests\Acceptance;
 
 use Tests\Support\AcceptanceTester;
-use Vortrixs\Portfolio\Home\Entity;
-use Vortrixs\Portfolio\Home\Model;
-use Vortrixs\Portfolio\Home\ViewModel;
+use Vortrixs\Portfolio\Pages\Home\{Entity, Model, ViewModel};
 
 class HomeCest
 {
@@ -32,7 +30,7 @@ class HomeCest
         foreach ($viewModel->getCvList() as $cv) {
             $I->see("{$cv['position']} @ {$cv['company']}", '.card > .card__title');
             $I->see($cv['length'], '.card > .card__line');
-            $I->see($cv['tags'], '.card > .card__line');
+            $I->see(implode(', ', $cv['tags']), '.card > .card__line');
             $I->see($cv['description'], '.card > .card__text');
         }
     }
