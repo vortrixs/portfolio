@@ -1,6 +1,6 @@
 <?php
 
-namespace Vortrixs\Portfolio\Components\Navigation;
+namespace Vortrixs\Portfolio\Layout\Navigation;
 
 return function (ViewModel $view) { ?>
     <nav>

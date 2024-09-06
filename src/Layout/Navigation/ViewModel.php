@@ -1,6 +1,6 @@
 <?php
 
-namespace Vortrixs\Portfolio\Components\Navigation;
+namespace Vortrixs\Portfolio\Layout\Navigation;
 
 use Vortrixs\Portfolio\SharedKernel\UrlHelper;
 

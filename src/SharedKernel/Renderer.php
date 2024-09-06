@@ -2,7 +2,6 @@
 
 namespace Vortrixs\Portfolio\SharedKernel;
 
-use Vortrixs\Portfolio\Components\Navigation;
 use Vortrixs\Portfolio\Layout;
 
 class Renderer
@@ -11,7 +10,7 @@ class Renderer
     {
     }
 
-    public function render(object $viewModel): string
+    public function renderSnippet(object $viewModel): string
     {
         $viewPath = (new \ReflectionClass($viewModel::class))->getFileName();
 
@@ -28,12 +27,13 @@ class Renderer
         return trim(ob_get_clean());
     }
 
-    public function renderLayout(object $viewModel, array $head = []): string
+    public function renderPage(object $viewModel, array $head = []): string
     {
-        $rendered_view = $this->render($viewModel);
+        $rendered_view = $this->renderSnippet($viewModel);
 
-        $header = $this->render($this->viewModelFactory->create(Navigation\ViewModel::class));
+        $header = $this->renderSnippet($this->viewModelFactory->create(Layout\Navigation\ViewModel::class));
+        $header .= $this->renderSnippet($this->viewModelFactory->create(Layout\About\ViewModel::class));
 
-        return $this->render(new Layout\ViewModel($rendered_view, $header, implode(PHP_EOL, $head)));
+        return $this->renderSnippet(new Layout\Page\ViewModel($rendered_view, $header, implode(PHP_EOL, $head)));
     }
 }

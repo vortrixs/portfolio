@@ -28,7 +28,7 @@ class Controller
         ];
 
         $body = $this->streamFactory->createStream(
-            $this->renderer->renderLayout($viewModel, $head)
+            $this->renderer->renderPage($viewModel, $head)
         );
 
         return $response

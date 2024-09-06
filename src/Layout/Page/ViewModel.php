@@ -1,6 +1,6 @@
 <?php
 
-namespace Vortrixs\Portfolio\Layout;
+namespace Vortrixs\Portfolio\Layout\Page;
 
 class ViewModel
 {

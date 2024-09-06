@@ -12,6 +12,7 @@ class RendererCest
 {
     public function testCanRenderViewBasedOnViewModel(UnitTester $I): void
     {
+        /** @var Renderer $renderer */
         $renderer = $I->get(Renderer::class);
         $viewModel = new ValidView\ViewModel;
 
@@ -22,19 +23,20 @@ class RendererCest
         </html>
         HTML;
 
-        $output = $renderer->render($viewModel);
+        $output = $renderer->renderSnippet($viewModel);
 
         $I->assertSame($expected, $output);
     }
 
     public function testCannotRenderViewIfOnlyViewModelExists(UnitTester $I): void
     {
+        /** @var Renderer $renderer */
         $renderer = $I->get(Renderer::class);
         $viewModel = new InvalidView\ViewModel;
 
         $I->expectThrowable(
             new \RuntimeException('View not found for view model: ' . $viewModel::class),
-            fn() => $renderer->render($viewModel),
+            fn() => $renderer->renderSnippet($viewModel),
         );
     }
 }
