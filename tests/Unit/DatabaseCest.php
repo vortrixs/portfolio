@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use Generator;
 use Tests\Support\UnitTester;
 use Vortrixs\Portfolio\SharedKernel\Database;
 
@@ -16,7 +17,7 @@ class DatabaseCest
         create table if not exists users (
             username text,
             email text,
-            password text,
+            password text
         )
         SQL);
     }
@@ -35,9 +36,11 @@ class DatabaseCest
 
         $I->assertTrue($hasInserted);
 
-        $response = $usersTable->select(columns: '*', limit: 1);
+        $response = $usersTable->select(columns: ['*']);
 
-        $I->assertEquals($userData, $response);
+        $I->assertInstanceOf(Generator::class, $response);
+        $I->assertTrue($response->valid());
+        $I->assertEquals((object) $userData, $response->current());
     }
 
     public function canUpdateRecord(UnitTester $I)
@@ -54,14 +57,15 @@ class DatabaseCest
 
         $updatedData = ['email' => 'my-new-email@localhost'];
 
-        $usersTable->update(data: $updatedData);
+        $usersTable->update(data: $updatedData, constraint: "email = :emailWhere", additionalPlaceholders: ['emailWhere' => $userData['email']]);
 
-        $actualEmail = $usersTable->select(columns: 'email');
+        $response = $usersTable->select(columns: ['email']);
 
-        $I->assertSame($updatedData['email'], $actualEmail);
+        $I->assertInstanceOf(Generator::class, $response);
+        $I->assertTrue($response->valid());
+        $I->assertSame($updatedData['email'], $response->current()->email);
     }
 
-    // can delete
     public function canDeleteRecord(UnitTester $I)
     {
         $userData = [
@@ -72,10 +76,13 @@ class DatabaseCest
 
         $usersTable = $this->db->table('users');
 
-        $usersTable->insert(data: $userData, table: 'users');
+        $usersTable->insert(data: $userData);
 
-        $usersTable->delete();
+        $response_a = $usersTable->delete('username', 'my-username');
 
-        $usersTable->select();
+        $response_b = $usersTable->select();
+
+        $I->assertTrue($response_a);
+        $I->assertFalse($response_b->valid());
     }
 }
