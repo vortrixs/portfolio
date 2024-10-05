@@ -22,7 +22,7 @@ class RendererCest
         </html>
         HTML;
 
-        $output = $renderer->renderSnippet($viewModel);
+        $output = $renderer->render($viewModel);
 
         $I->assertSame($expected, $output);
     }
@@ -35,7 +35,7 @@ class RendererCest
 
         $I->expectThrowable(
             new \RuntimeException('View not found for view model: ' . $viewModel::class),
-            fn() => $renderer->renderSnippet($viewModel),
+            fn() => $renderer->render($viewModel),
         );
     }
 }

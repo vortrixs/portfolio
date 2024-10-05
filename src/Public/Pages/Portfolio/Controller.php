@@ -1,27 +1,25 @@
 <?php
 
-namespace Vortrixs\Portfolio\Pages\Portfolio;
+namespace Vortrixs\Portfolio\Public\Pages\Portfolio;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\StreamFactoryInterface;
-use Vortrixs\Portfolio\SharedKernel\Renderer;
-use Vortrixs\Portfolio\SharedKernel\UrlHelper;
+use Vortrixs\Portfolio\Public;
+use Vortrixs\Portfolio\Public\Components;
 use Vortrixs\Portfolio\SharedKernel\ViewModelFactory;
 
 class Controller
 {
     public function __construct(
-        private Model $model,
-        private Renderer $renderer,
+        private Public\Renderer $renderer,
         private ViewModelFactory $viewModelFactory,
         private StreamFactoryInterface $streamFactory,
-        private UrlHelper $urlHelper,
     ) {}
 
     public function __invoke(Response $response)
     {
-        $viewModel = $this->viewModelFactory->create(ViewModel::class);
+        $viewModel = $this->viewModelFactory->create(Components\Portfolio\ViewModel::class);
 
         $head = [
             '<meta property="og:title" content="Portfolio">',

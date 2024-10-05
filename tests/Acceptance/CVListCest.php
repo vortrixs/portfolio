@@ -3,9 +3,9 @@
 namespace Tests\Acceptance;
 
 use Tests\Support\AcceptanceTester;
-use Vortrixs\Portfolio\Pages\Home\{Entity, Model, ViewModel};
+use Vortrixs\Portfolio\Public\Components\CVList\{Entity, Model, ViewModel};
 
-class HomeCest
+class CVListCest
 {
     public function validateStructure(AcceptanceTester $I)
     {

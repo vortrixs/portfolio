@@ -1,6 +1,6 @@
 <?php
 
-namespace Vortrixs\Portfolio\Layout\About;
+namespace Vortrixs\Portfolio\Public\Components\About;
 
 return function (ViewModel $view) { ?>
     <div>

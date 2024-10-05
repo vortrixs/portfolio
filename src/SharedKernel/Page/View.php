@@ -1,6 +1,6 @@
 <?php
 
-namespace Vortrixs\Portfolio\Layout\Page;
+namespace Vortrixs\Portfolio\SharedKernel\Page;
 
 return function (ViewModel $view) { ?>
 <html lang="en">

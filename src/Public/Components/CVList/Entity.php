@@ -1,6 +1,6 @@
 <?php
 
-namespace Vortrixs\Portfolio\Pages\Home;
+namespace Vortrixs\Portfolio\Public\Components\CVList;
 
 class Entity
 {

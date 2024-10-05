@@ -1,18 +1,17 @@
 <?php
 
-namespace Vortrixs\Portfolio\Pages\Home;
+namespace Vortrixs\Portfolio\Public\Pages\Home;
 
 use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\StreamFactoryInterface;
-use Vortrixs\Portfolio\SharedKernel\Renderer;
 use Vortrixs\Portfolio\SharedKernel\ViewModelFactory;
+use Vortrixs\Portfolio\Public;
+use Vortrixs\Portfolio\Public\Components;
 
 class Controller
 {
     public function __construct(
-        private Model $model,
-        private Renderer $renderer,
+        private Public\Renderer $renderer,
         private ViewModelFactory $viewModelFactory,
         private StreamFactoryInterface $streamFactory,
     ) {
@@ -20,7 +19,7 @@ class Controller
 
     public function __invoke(Response $response)
     {
-        $viewModel = $this->viewModelFactory->create(ViewModel::class);
+        $viewModel = $this->viewModelFactory->create(Components\CVList\ViewModel::class);
 
         $head = [
             '<meta property="og:title" content="Home">',

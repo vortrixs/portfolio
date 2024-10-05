@@ -1,6 +1,6 @@
 <?php
 
-namespace Vortrixs\Portfolio\Pages\Portfolio;
+namespace Vortrixs\Portfolio\Public\Components\Portfolio;
 
 return function (ViewModel $view) { ?>
     <h1>Portfolio!!!</h1>

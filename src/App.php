@@ -8,8 +8,8 @@ use Psr\Http\Message\StreamFactoryInterface;
 use Slim\App;
 use Slim\Psr7\Factory\StreamFactory;
 use Vortrixs\Portfolio\SharedKernel\UrlHelper;
-use Vortrixs\Portfolio\Pages\Home\Controller as HomeController;
-use Vortrixs\Portfolio\Pages\Portfolio\Controller as PortfolioController;
+use Vortrixs\Portfolio\Public\Pages\Home\Controller as HomeController;
+use Vortrixs\Portfolio\Public\Pages\Portfolio\Controller as PortfolioController;
 
 function createApp(): App
 {
