@@ -3,6 +3,7 @@
 namespace Tests\Functional;
 
 use Tests\Support\FunctionalTester;
+use Vortrixs\Portfolio\SharedKernel\UrlHelper;
 
 class PortfolioCest
 {
@@ -10,7 +11,7 @@ class PortfolioCest
     {
         $I->haveHttpHeader('Accept', 'text/html');
 
-        $I->sendGet('/portfolio');
+        $I->sendGet($I->get(UrlHelper::class)->portfolio);
 
         $I->seeResponseCodeIsSuccessful();
         $I->seeHttpHeader('Content-Type', 'text/html');

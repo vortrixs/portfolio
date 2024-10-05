@@ -63,22 +63,7 @@ class Database
             throw new \Error();
         }
 
-        foreach ($data as $key => $value) {
-            $parameter = ":{$key}";
-            $type = match (true) {
-                is_string($value) => PDO::PARAM_STR,
-                is_int($value) => PDO::PARAM_INT,
-                is_bool($value) => PDO::PARAM_BOOL,
-                is_null($value) => PDO::PARAM_NULL,
-                default => 0,
-            };
-
-            if (0 !== $type) {
-                $statement->bindValue($parameter, $value, $type);
-            } else {
-                $statement->bindValue($parameter, (string) $value, PDO::PARAM_STR);
-            }
-        }
+        $statement = $this->bindValues($data, $statement);
 
         $this->pdo->beginTransaction();
 
@@ -122,7 +107,7 @@ class Database
     /**
      * @param array<string,mixed> $data
      */
-    public function update(array $data, ?string $constraint = null, array $additionalPlaceholders = [], string $classname = 'stdClass'): Generator|false
+    public function update(array $data, ?string $constraint = null, array $additionalPlaceholders = []): bool
     {
         /** @var string[] $keys */
         $keys = array_keys($data);
@@ -140,39 +125,23 @@ class Database
             throw new \Error();
         }
 
-        foreach (array_merge($data,$additionalPlaceholders) as $key => $value) {
-            $parameter = ":{$key}";
-            $type = match (true) {
-                is_string($value) => PDO::PARAM_STR,
-                is_int($value) => PDO::PARAM_INT,
-                is_bool($value) => PDO::PARAM_BOOL,
-                is_null($value) => PDO::PARAM_NULL,
-                default => null,
-            };
+        $statement = $this->bindValues(array_merge($data, $additionalPlaceholders), $statement);
 
-            if (null !== $type) {
-                $statement->bindValue($parameter, $value, $type);
-            } else {
-                $statement->bindValue($parameter, (string) $value, PDO::PARAM_STR);
-            }
-        }
-
-        $this->pdo->beginTransaction();
+        $t = $this->pdo->beginTransaction();
 
         try {
             $statement->execute();
             $this->pdo->commit();
+            return true;
         } catch (\Error | \Exception) {
             $this->pdo->rollBack();
             return false;
         }
-
-        return $this->createGenerator($statement, $classname);
     }
 
-    public function delete(string|int $id, mixed $value)
+    public function delete(string $column, mixed $value)
     {
-        $query = "delete from {$this->table} where {$id} = :{$id}";
+        $query = "delete from {$this->table} where {$column} = :{$column}";
 
         $statement = $this->pdo->prepare($query);
 
@@ -180,19 +149,7 @@ class Database
             throw new \Error();
         }
 
-        $type = match (true) {
-            is_string($value) => PDO::PARAM_STR,
-            is_int($value) => PDO::PARAM_INT,
-            is_bool($value) => PDO::PARAM_BOOL,
-            is_null($value) => PDO::PARAM_NULL,
-            default => null,
-        };
-
-        if (null !== $type) {
-            $statement->bindValue(":{$id}", $value, $type);
-        } else {
-            $statement->bindValue(":{$id}", (string) $value, PDO::PARAM_STR);
-        }
+        $statement = $this->bindValues([$column => $value], $statement);
 
         $this->pdo->beginTransaction();
 
@@ -211,5 +168,27 @@ class Database
         while ($object = $statement->fetchObject($classname)) {
             yield $object;
         }
+    }
+
+    private function bindValues(array $data, PDOStatement $statement): PDOStatement
+    {
+        foreach ($data as $key => $value) {
+            $parameter = ":{$key}";
+            $type = match (true) {
+                is_string($value) => PDO::PARAM_STR,
+                is_int($value) => PDO::PARAM_INT,
+                is_bool($value) => PDO::PARAM_BOOL,
+                is_null($value) => PDO::PARAM_NULL,
+                default => null,
+            };
+
+            if (null !== $type) {
+                $statement->bindValue($parameter, $value, $type);
+            } else {
+                $statement->bindValue($parameter, (string) $value, PDO::PARAM_STR);
+            }
+        }
+
+        return $statement;
     }
 }

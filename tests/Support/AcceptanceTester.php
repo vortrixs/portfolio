@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Support;
 
 use Tests\Support\Actions\App;
+use Tests\Support\Actions\Database;
 
 /**
  * Inherited Methods
@@ -25,4 +26,5 @@ class AcceptanceTester extends \Codeception\Actor
 {
     use _generated\AcceptanceTesterActions;
     use App;
+    use Database;
 }

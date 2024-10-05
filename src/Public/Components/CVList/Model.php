@@ -2,23 +2,38 @@
 
 namespace Vortrixs\Portfolio\Public\Components\CVList;
 
+use Generator;
+use Vortrixs\Portfolio\SharedKernel\Database;
+
 class Model
 {
-    private array $storage = [];
+    private readonly Database $database;
 
-    // create
+    public function __construct(Database $database)
+    {
+        $this->database = $database->table('cv');
+    }
+
     public function create(Entity $entity)
     {
-        $this->storage[] = $entity;
+        $this->database->insert($entity->toArray());
     }
 
-    // read
-    public function list()
+    /**
+     * @return Generator<Entity>
+     */
+    public function list(): Generator
     {
-        return $this->storage;
+        return $this->database->select(classname: Entity::class);
     }
 
-    // update
+    public function update(Entity $entity)
+    {
+        $this->database->update($entity->toArray(), 'id = :whereId', ['whereId' => $entity->id]);
+    }
 
-    // delete
+    public function delete(int $id)
+    {
+        $this->database->delete('id', $id);
+    }
 }

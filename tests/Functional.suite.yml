@@ -7,10 +7,11 @@
 
 actor: FunctionalTester
 modules:
-    config:
-        Tests\Support\Modules\SlimSupport:
-            application: tests/TestApp.php
     enabled:
+        - Tests\Support\Modules\SlimSupport:
+            application: tests/TestApp.php
         - REST:
             depends: Tests\Support\Modules\SlimSupport
+        - Tests\Support\Modules\SqliteDatabase:
+            filename: 'database.sqlite'
 step_decorators: ~

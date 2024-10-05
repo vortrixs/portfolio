@@ -18,6 +18,6 @@ class ViewModel
 
     private function formatCv(Entity $entity)
     {
-        return get_object_vars($entity);
+        return $entity->toArray();
     }
 }

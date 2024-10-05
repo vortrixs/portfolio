@@ -3,4 +3,6 @@ modules:
     enabled:
         - Tests\Support\Modules\SlimSupport:
             application: tests/TestApp.php
+        - Tests\Support\Modules\SqliteDatabase:
+            filename: 'database.sqlite'
 step_decorators: ~
