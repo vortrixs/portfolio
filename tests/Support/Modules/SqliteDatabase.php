@@ -7,7 +7,7 @@ use Codeception\TestInterface;
 
 class SqliteDatabase extends Module
 {
-    public function _before(TestInterface $test)
+    public function _before(TestInterface $test): void
     {
         $path = codecept_output_dir($this->config['filename']);
 
@@ -20,7 +20,8 @@ class SqliteDatabase extends Module
         parent::_before($test);
     }
 
-    public function getDatabaseFile() {
+    public function getDatabaseFile(): string
+    {
         return codecept_output_dir($this->config['filename']);
     }
 }

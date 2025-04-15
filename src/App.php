@@ -18,6 +18,7 @@ function createApp(): App
     $app = Bridge::create($container);
 
     $container->set(StreamFactoryInterface::class, $container->get(StreamFactory::class));
+    $container->set(Core\Database::class, new Core\Database(dirname(getcwd(), 1) . '/database.prod.sqlite'));
 
     $container->call(function (UrlHelper $urlHelper, App $router) {
         $router->get($urlHelper->frontpage, HomeController::class);

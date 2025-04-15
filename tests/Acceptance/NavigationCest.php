@@ -10,7 +10,7 @@ class NavigationCest
     public function _before(AcceptanceTester $I)
     {
         $I->prepareDatabase();
-        $I->createCVTable();
+        $I->runInstallSql();
     }
 
     public function currentPageHasActiveClass(AcceptanceTester $I)

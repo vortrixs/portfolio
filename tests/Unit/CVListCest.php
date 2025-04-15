@@ -8,7 +8,7 @@ class CVListCest
     public function _before(UnitTester $I)
     {
         $I->prepareDatabase();
-        $I->createCVTable();
+        $I->runInstallSql();
     }
 
     public function canCreateList(UnitTester $I)

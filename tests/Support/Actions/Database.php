@@ -10,18 +10,13 @@ trait Database {
         $this->getApp()->getContainer()->set(Core\Database::class, new Core\Database($this->getDatabaseFile()));
     }
 
-    public function createCVTable()
+    /**
+     * @see sql/install.sql
+     */
+    public function runInstallSql()
     {
-        $this->get(Core\Database::class)->query(<<<SQL
-        create table if not exists cv (
-            id serial primary key,
-            position text,
-            company text,
-            employmentType text,
-            length text,
-            tags text[],
-            description text
-        )
-        SQL);
+        $sql = file_get_contents(codecept_root_dir('sql/install.sql'));
+
+        $this->get(Core\Database::class)->query($sql);
     }
 }

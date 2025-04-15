@@ -14,7 +14,7 @@ class Model
         $this->database = $database->table('cv');
     }
 
-    public function create(Entity $entity)
+    public function create(Entity $entity): void
     {
         $this->database->insert($entity->toArray());
     }
@@ -27,12 +27,12 @@ class Model
         return $this->database->select(classname: Entity::class);
     }
 
-    public function update(Entity $entity)
+    public function update(Entity $entity): void
     {
         $this->database->update($entity->toArray(), 'id = :id');
     }
 
-    public function delete(int $id)
+    public function delete(int $id): void
     {
         $this->database->delete('id', $id);
     }
