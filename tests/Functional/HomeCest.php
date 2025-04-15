@@ -22,15 +22,4 @@ class HomeCest
         $I->seeResponseCodeIsSuccessful();
         $I->seeHttpHeader('Content-Type', 'text/html');
     }
-
-
-    public function canLoadHomePage(FunctionalTester $I)
-    {
-        $I->haveHttpHeader('Accept', 'text/html');
-
-        $I->sendGet($I->get(UrlHelper::class)->home);
-
-        $I->seeResponseCodeIsSuccessful();
-        $I->seeHttpHeader('Content-Type', 'text/html');
-    }
 }

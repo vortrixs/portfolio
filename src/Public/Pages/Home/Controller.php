@@ -3,6 +3,7 @@
 namespace Vortrixs\Portfolio\Public\Pages\Home;
 
 use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\StreamFactoryInterface;
 use Vortrixs\Portfolio\Core\ViewModelFactory;
 use Vortrixs\Portfolio\Public;
@@ -14,10 +15,9 @@ class Controller
         private Public\Renderer $renderer,
         private ViewModelFactory $viewModelFactory,
         private StreamFactoryInterface $streamFactory,
-    ) {
-    }
+    ) {}
 
-    public function __invoke(Response $response)
+    public function __invoke(Request $request, Response $response)
     {
         $viewModel = $this->viewModelFactory->create(Components\CVList\ViewModel::class);
 
@@ -27,7 +27,7 @@ class Controller
         ];
 
         $body = $this->streamFactory->createStream(
-            $this->renderer->renderPage($viewModel, $head)
+            $this->renderer->renderPage($viewModel, $head, $request)
         );
 
         return $response

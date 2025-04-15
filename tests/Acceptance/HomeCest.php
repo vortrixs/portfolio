@@ -3,7 +3,7 @@
 namespace Tests\Acceptance;
 
 use Tests\Support\AcceptanceTester;
-use Vortrixs\Portfolio\Public\Components\CVList\{Entity, Model, ViewModel};
+use Vortrixs\Portfolio\Public\Components\CVList\{Entity, Model};
 use Vortrixs\Portfolio\Core\UrlHelper;
 
 class HomeCest
@@ -35,12 +35,12 @@ class HomeCest
         $I->see('CV', 'h1');
         
         $I->see('Junior Backend Developer @ Company #1', '.card > .card__title');
-        $I->see('Full-time 2010 - 2011', '.card > .card__line');
+        $I->see('Full-time, 2010 - 2011', '.card > .card__line');
         $I->see('PHP, MySQL', '.card > .card__line');
         $I->see('This was my first job', '.card > .card__text');
 
         $I->see('Fullstack Developer @ Company #2', '.card > .card__title');
-        $I->see('Contract 2012 - 2014', '.card > .card__line');
+        $I->see('Contract, 2012 - 2014', '.card > .card__line');
         $I->see('PHP, Postgres, TypeScript, Svelte', '.card > .card__line');
         $I->see('This was an awesome job', '.card > .card__text');
     }

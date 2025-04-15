@@ -17,7 +17,7 @@ class Controller
         private StreamFactoryInterface $streamFactory,
     ) {}
 
-    public function __invoke(Response $response)
+    public function __invoke(Request $request, Response $response)
     {
         $viewModel = $this->viewModelFactory->create(Components\Portfolio\ViewModel::class);
 
@@ -27,7 +27,7 @@ class Controller
         ];
 
         $body = $this->streamFactory->createStream(
-            $this->renderer->renderPage($viewModel, $head)
+            $this->renderer->renderPage($viewModel, $head, $request)
         );
 
         return $response
