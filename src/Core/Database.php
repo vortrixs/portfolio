@@ -128,7 +128,7 @@ class Database
 
         $statement = $this->bindValues($data, $statement);
 
-        $t = $this->pdo->beginTransaction();
+        $this->pdo->beginTransaction();
 
         try {
             $statement->execute();

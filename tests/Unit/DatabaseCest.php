@@ -15,6 +15,7 @@ class DatabaseCest
         $this->db = new Database($I->getDatabaseFile());
         $this->db->query(<<<SQL
         create table if not exists users (
+            id int,
             username text,
             email text,
             password text
@@ -25,6 +26,7 @@ class DatabaseCest
     public function canReadAndWrite(UnitTester $I)
     {
         $userData = [
+            'id' => 1,
             'username' => 'my-username',
             'email' => 'my-email@localhost',
             'password' => md5('p455w0rd'),
@@ -46,6 +48,7 @@ class DatabaseCest
     public function canUpdateRecord(UnitTester $I)
     {
         $userData = [
+            'id' => 1,
             'username' => 'my-username',
             'email' => 'my-email@localhost',
             'password' => md5('p455w0rd'),
@@ -55,12 +58,13 @@ class DatabaseCest
 
         $usersTable->insert(data: $userData);
 
-        $updatedData = ['email' => 'my-new-email@localhost'];
+        $updatedData = ['id' => 1, 'email' => 'my-new-email@localhost'];
 
-        $usersTable->update(data: $updatedData, constraint: "email = :emailWhere", additionalPlaceholders: ['emailWhere' => $userData['email']]);
+        $update_success = $usersTable->update(data: $updatedData, constraint: "id = :id");
 
         $response = $usersTable->select(columns: ['email']);
 
+        $I->assertTrue($update_success);
         $I->assertInstanceOf(Generator::class, $response);
         $I->assertTrue($response->valid());
         $I->assertSame($updatedData['email'], $response->current()->email);
@@ -69,6 +73,7 @@ class DatabaseCest
     public function canDeleteRecord(UnitTester $I)
     {
         $userData = [
+            'id' => 1,
             'username' => 'my-username',
             'email' => 'my-email@localhost',
             'password' => md5('p455w0rd'),
@@ -78,7 +83,7 @@ class DatabaseCest
 
         $usersTable->insert(data: $userData);
 
-        $response_a = $usersTable->delete('username', 'my-username');
+        $response_a = $usersTable->delete('id', 1);
 
         $response_b = $usersTable->select();
 
