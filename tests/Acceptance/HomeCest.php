@@ -11,7 +11,7 @@ class HomeCest
     public function _before(AcceptanceTester $I)
     {
         $I->prepareDatabase();
-        $I->runInstallSql();
+        $I->setUpApplicationDatabase();
     }
 
     public function validateStructure(AcceptanceTester $I)

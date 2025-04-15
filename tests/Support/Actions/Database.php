@@ -13,10 +13,15 @@ trait Database {
     /**
      * @see sql/install.sql
      */
-    public function runInstallSql()
+    public function setUpApplicationDatabase()
     {
-        $sql = file_get_contents(codecept_root_dir('sql/install.sql'));
+        $sqlDir = codecept_root_dir('sql');
 
-        $this->get(Core\Database::class)->query($sql);
+        exec("{$sqlDir}/install.sh {$sqlDir} {$this->getDatabaseFile()}", $output, $resultCode);
+
+        if (0 !== $resultCode) {
+            var_dump($output);
+            die;
+        }
     }
 }

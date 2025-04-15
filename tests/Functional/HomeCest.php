@@ -10,7 +10,7 @@ class HomeCest
     public function _before(FunctionalTester $I)
     {
         $I->prepareDatabase();
-        $I->runInstallSql();
+        $I->setUpApplicationDatabase();
     }
 
     public function canLoadFrontPage(FunctionalTester $I)
