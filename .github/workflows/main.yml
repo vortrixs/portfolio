@@ -15,10 +15,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Use PHP ${{ matrix.node-version }}
+    - name: Use PHP ${{ matrix.php-version }}
       uses: shivammathur/setup-php@v2
       with:
-        php-version: ${{ matrix.node-version }}
+        php-version: ${{ matrix.php-version }}
     
     - run: composer i
     
