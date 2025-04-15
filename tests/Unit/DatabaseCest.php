@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use Generator;
 use Tests\Support\UnitTester;
-use Vortrixs\Portfolio\SharedKernel\Database;
+use Vortrixs\Portfolio\Core\Database;
 
 class DatabaseCest
 {

@@ -24,7 +24,7 @@ class CVListCest
 
         $viewModel = new ViewModel($model);
 
-        $I->assertCount(2, $viewModel->getCvList());
+        $I->assertCount(2, iterator_to_array($viewModel->getCvList()));
     }
 
     public function canUpdateList(UnitTester $I)
@@ -38,33 +38,30 @@ class CVListCest
         ];
         array_map($model->create(...), $entities);
 
-        $model->update($entities[0], [
-            'position' => 'New Position',
-            'company' => 'Random Startup Venture',
-            'employmentType' => 'Unpaid intern',
-            'length' => '2020',
-            'tags' => ['NextJS'],
-            'description' => 'Total scam'
-        ]);
+        $model->update(new Entity(1, 'New Position', 'Random Startup Venture', 'Unpaid intern', '2020', ['NextJS'], 'Total scam'));
 
         $viewModel = new ViewModel($model);
 
-        [$cv_a, $cv_b] = $viewModel->getCvList();
+        $list = $viewModel->getCvList();
+        $cv_a = $list->current();
 
         // assert item 1 has been updated
         $I->assertSame('New Position', $cv_a['position']);
         $I->assertSame('Random Startup Venture', $cv_a['company']);
         $I->assertSame('Unpaid intern', $cv_a['employmentType']);
         $I->assertSame('2020', $cv_a['length']);
-        $I->assertSame('NextJS', $cv_a['tags']);
+        $I->assertSame(['NextJS'], $cv_a['tags']);
         $I->assertSame('Total scam', $cv_a['description']);
+
+        $list->next();
+        $cv_b = $list->current();
 
         // assert item 2 is unchanged
         $I->assertSame('Fullstack Developer', $cv_b['position']);
         $I->assertSame('Company #2', $cv_b['company']);
         $I->assertSame('Contract', $cv_b['employmentType']);
         $I->assertSame('2012 - 2014', $cv_b['length']);
-        $I->assertSame('PHP, Postgres, TypeScript, Svelte', $cv_b['tags']);
+        $I->assertSame(['PHP', 'Postgres', 'TypeScript', 'Svelte'], $cv_b['tags']);
         $I->assertSame('This was an awesome job', $cv_b['description']);
     }
 
@@ -84,12 +81,15 @@ class CVListCest
         $viewModel = new ViewModel($model);
 
         $cvList = $viewModel->getCvList();
-        $I->assertCount(1, $cvList);
-        $I->assertSame('Fullstack Developer', $cvList[0]['position']);
-        $I->assertSame('Company #2', $cvList[0]['company']);
-        $I->assertSame('Contract', $cvList[0]['employmentType']);
-        $I->assertSame('2012 - 2014', $cvList[0]['length']);
-        $I->assertSame('PHP, Postgres, TypeScript, Svelte', $cvList[0]['tags']);
-        $I->assertSame('This was an awesome job', $cvList[0]['description']);
+
+        $item = $cvList->current();
+
+        $I->assertCount(1, iterator_to_array($cvList));
+        $I->assertSame('Fullstack Developer', $item['position']);
+        $I->assertSame('Company #2', $item['company']);
+        $I->assertSame('Contract', $item['employmentType']);
+        $I->assertSame('2012 - 2014', $item['length']);
+        $I->assertSame(['PHP', 'Postgres', 'TypeScript', 'Svelte'], $item['tags']);
+        $I->assertSame('This was an awesome job', $item['description']);
     }
 }

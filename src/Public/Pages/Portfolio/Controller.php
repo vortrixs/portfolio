@@ -7,7 +7,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\StreamFactoryInterface;
 use Vortrixs\Portfolio\Public;
 use Vortrixs\Portfolio\Public\Components;
-use Vortrixs\Portfolio\SharedKernel\ViewModelFactory;
+use Vortrixs\Portfolio\Core\ViewModelFactory;
 
 class Controller
 {

@@ -3,7 +3,7 @@
 namespace Vortrixs\Portfolio\Public\Components\CVList;
 
 use Generator;
-use Vortrixs\Portfolio\SharedKernel\Database;
+use Vortrixs\Portfolio\Core\Database;
 
 class Model
 {
@@ -29,7 +29,7 @@ class Model
 
     public function update(Entity $entity)
     {
-        $this->database->update($entity->toArray(), 'id = :whereId', ['whereId' => $entity->id]);
+        $this->database->update($entity->toArray(), 'id = :id');
     }
 
     public function delete(int $id)

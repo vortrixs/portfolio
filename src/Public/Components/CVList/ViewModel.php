@@ -9,15 +9,12 @@ class ViewModel
     }
 
     /**
-     * return array<{position: string, company: string, length: string, tags: string, description: string}>
+     * return Generator<array{position: string, company: string, length: string, tags: string, description: string}>
      */
-    public function getCvList(): array
+    public function getCvList(): \Generator
     {
-        return array_map($this->formatCv(...), $this->model->list());
-    }
-
-    private function formatCv(Entity $entity)
-    {
-        return $entity->toArray();
+        foreach ($this->model->list() as $item) {
+            yield $item->toArray();
+        }
     }
 }

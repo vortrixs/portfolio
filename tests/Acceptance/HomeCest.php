@@ -4,7 +4,7 @@ namespace Tests\Acceptance;
 
 use Tests\Support\AcceptanceTester;
 use Vortrixs\Portfolio\Public\Components\CVList\{Entity, Model, ViewModel};
-use Vortrixs\Portfolio\SharedKernel\UrlHelper;
+use Vortrixs\Portfolio\Core\UrlHelper;
 
 class HomeCest
 {

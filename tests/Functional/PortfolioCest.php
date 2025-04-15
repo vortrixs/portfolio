@@ -3,7 +3,7 @@
 namespace Tests\Functional;
 
 use Tests\Support\FunctionalTester;
-use Vortrixs\Portfolio\SharedKernel\UrlHelper;
+use Vortrixs\Portfolio\Core\UrlHelper;
 
 class PortfolioCest
 {

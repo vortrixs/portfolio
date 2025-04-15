@@ -1,10 +1,11 @@
 <?php
 
-namespace Vortrixs\Portfolio\SharedKernel;
+namespace Vortrixs\Portfolio\Core;
 
 use Generator;
 use PDO;
 use PDOStatement;
+use stdClass;
 
 class Database
 {
@@ -23,7 +24,7 @@ class Database
         return $this;
     }
 
-    public function query(string $sql)
+    public function query(string $sql): array|false
     {
         $statement = $this->pdo->prepare($sql);
 
@@ -35,12 +36,12 @@ class Database
 
         try {
             $statement->execute();
+            $this->pdo->commit();
         } catch (\Error | \Exception) {
             $this->pdo->rollBack();
             return false;
         }
 
-        $this->pdo->commit();
 
         return $statement->fetchAll();
     }
@@ -78,7 +79,7 @@ class Database
     }
 
     /**
-     * @param string[] $columns
+     * @param array<string> $columns
      */
     public function select(array $columns = ['*'], string $classname = 'stdClass'): Generator|false
     {
@@ -107,7 +108,7 @@ class Database
     /**
      * @param array<string,mixed> $data
      */
-    public function update(array $data, ?string $constraint = null, array $additionalPlaceholders = []): bool
+    public function update(array $data, ?string $constraint = null): bool
     {
         /** @var string[] $keys */
         $keys = array_keys($data);
@@ -125,7 +126,7 @@ class Database
             throw new \Error();
         }
 
-        $statement = $this->bindValues(array_merge($data, $additionalPlaceholders), $statement);
+        $statement = $this->bindValues($data, $statement);
 
         $t = $this->pdo->beginTransaction();
 
@@ -139,7 +140,7 @@ class Database
         }
     }
 
-    public function delete(string $column, mixed $value)
+    public function delete(string $column, mixed $value): bool
     {
         $query = "delete from {$this->table} where {$column} = :{$column}";
 
@@ -165,9 +166,19 @@ class Database
 
     private function createGenerator(PDOStatement $statement, string $classname): Generator
     {
-        while ($object = $statement->fetchObject($classname)) {
-            yield $object;
-        }
+        if (stdClass::class === $classname) {
+            while ($data = $statement->fetchObject($classname)) {
+                yield $data;
+            }
+        } else {
+            while ($data = $statement->fetch(PDO::FETCH_ASSOC)) {
+                if (method_exists($classname, 'fromDatabase')) {
+                    yield $classname::fromDatabase($data);
+                } else {
+                    yield new $classname(...$data);
+                }
+            }
+        }        
     }
 
     private function bindValues(array $data, PDOStatement $statement): PDOStatement
@@ -185,7 +196,7 @@ class Database
             if (null !== $type) {
                 $statement->bindValue($parameter, $value, $type);
             } else {
-                $statement->bindValue($parameter, (string) $value, PDO::PARAM_STR);
+                $statement->bindValue($parameter, serialize($value), PDO::PARAM_STR);
             }
         }
 

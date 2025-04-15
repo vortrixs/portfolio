@@ -2,17 +2,17 @@
 
 namespace Tests\Support\Actions;
 
-use Vortrixs\Portfolio\SharedKernel; 
+use Vortrixs\Portfolio\Core; 
 
 trait Database {
     public function prepareDatabase()
     {
-        $this->getApp()->getContainer()->set(SharedKernel\Database::class, new SharedKernel\Database($this->getDatabaseFile()));
+        $this->getApp()->getContainer()->set(Core\Database::class, new Core\Database($this->getDatabaseFile()));
     }
 
     public function createCVTable()
     {
-        $this->get(SharedKernel\Database::class)->query(<<<SQL
+        $this->get(Core\Database::class)->query(<<<SQL
         create table if not exists cv (
             id serial primary key,
             position text,

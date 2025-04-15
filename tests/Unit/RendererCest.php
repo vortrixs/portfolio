@@ -5,7 +5,7 @@ namespace Tests\Unit;
 use Tests\Support\Data\ValidView;
 use Tests\Support\Data\InvalidView;
 use Tests\Support\UnitTester;
-use Vortrixs\Portfolio\SharedKernel\Renderer;
+use Vortrixs\Portfolio\Core\Renderer;
 
 class RendererCest
 {

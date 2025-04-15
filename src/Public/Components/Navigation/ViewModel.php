@@ -2,7 +2,7 @@
 
 namespace Vortrixs\Portfolio\Public\Components\Navigation;
 
-use Vortrixs\Portfolio\SharedKernel\UrlHelper;
+use Vortrixs\Portfolio\Core\UrlHelper;
 
 class ViewModel
 {

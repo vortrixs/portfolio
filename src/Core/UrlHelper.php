@@ -1,6 +1,6 @@
 <?php
 
-namespace Vortrixs\Portfolio\SharedKernel;
+namespace Vortrixs\Portfolio\Core;
 
 class UrlHelper
 {

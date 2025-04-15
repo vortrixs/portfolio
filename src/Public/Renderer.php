@@ -2,12 +2,12 @@
 
 namespace Vortrixs\Portfolio\Public; 
 
-use Vortrixs\Portfolio\SharedKernel\Renderer as SharedKernelRenderer;
-use Vortrixs\Portfolio\SharedKernel\Page;
-use Vortrixs\Portfolio\SharedKernel\ViewModelFactory;
+use Vortrixs\Portfolio\Core\Renderer as SharedRenderer;
+use Vortrixs\Portfolio\Core\Page;
+use Vortrixs\Portfolio\Core\ViewModelFactory;
 
 class Renderer {
-    public function __construct(private SharedKernelRenderer $renderer, private ViewModelFactory $viewModelFactory)
+    public function __construct(private SharedRenderer $renderer, private ViewModelFactory $viewModelFactory)
     {
         
     }
